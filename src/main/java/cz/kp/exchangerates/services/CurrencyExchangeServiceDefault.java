@@ -179,7 +179,7 @@ public class CurrencyExchangeServiceDefault implements CurrencyExchangeService {
         ExchangeData dataOut = exchangeDataRepository.findByIdCurrencyAndDate(codeOut.getId(), dto.getDate());
 
         double result = (dto.getAmountIn() / codeIn.getUnit()) * dataIn.getAmount();
-        result = result / dataOut.getAmount();
+        result = (result * codeOut.getUnit()) / dataOut.getAmount();
 
         dto.setFinalAmount(result);
 
